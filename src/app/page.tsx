@@ -1,42 +1,20 @@
-import Link from "next/link"; 
+import Header from "./component/Header";
+import Hero from "./component/Hero";
 
-export default function Header() {
-
-  const navLinks = [
-    { name: 'Portfolio', href: '#about' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Links', href: '#contact' },
-    { name:'Contacts', href:'#contact'},
-  ];
+export default function Home() {
   return (
-    <header className="sticky top-0 z-50 bg-slate-950/85 backdrop-blur-md border-b border-white/10">
-      <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link 
-          href="/"
-          className="text-xl font-bold text-green-400 tracking-tight hover:text-sky-300 transition-colors"
-          >
-          Lim&apos;s DevFolio
-        </Link>
-        
-        <div className="flex items-center gap-6">
-          {navLinks.map((link) => (
-            <Link 
-              key={link.name} 
-              href={link.href} 
-              className="text-sm font-medium text-slate-300 hover:text-white transition-colors"
-            >
-              {link.name}
-            </Link>
-          ))}
-          
-          <Link 
-            href="#contact" 
-            className="text-sm px-4 py-2 bg-sky-500 text-slate-950 font-semibold rounded-full hover:bg-sky-400 transition-colors"
-          >
-            Hire Me
-          </Link>
-        </div>
-      </nav>
-    </header>
+    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans">
+      <Header />
+      
+      <main className="max-w-7xl mx-auto px-6 space-y-20">
+        {/* HERO SECTION */}
+        <Hero />
+
+        {/* PROJECTS GRID */}
+        <section id="projects" className="scroll-mt-20">
+          {/* Your ProjectCard mapping goes here */}
+        </section>
+      </main>
+    </div>
   );
 }
