@@ -1,4 +1,5 @@
 import Link from "next/link"; 
+import Image from "next/image";
 
 export default function Header() {
   const navLinks = [
@@ -11,9 +12,17 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-slate-950/85 backdrop-blur-md border-b border-white/10">
       <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         
-        <Link href="/" className="text-xl font-bold text-green-400 tracking-tight hover:text-sky-300 transition-colors">
+        <Link href="/" className="inline-flex items-center gap-3 text-2xl font-black text-green-400 tracking-tight hover:text-sky-300 transition-colors">
+        <div className="relative w-8 h-8 rounded-lg overflow-hidden  group-hover:border-sky-400/50 transition-colors">
+            <Image
+              src="/side.png" 
+              alt="KenDev Logo"
+              fill
+              className="object-cover"/>
+        </div>
           Lim&apos;s DevFolio
         </Link>
+
         
         <div className="flex items-center gap-10">
           {navLinks.map((link) => (

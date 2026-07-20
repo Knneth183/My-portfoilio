@@ -29,7 +29,7 @@ export default function Hero() {
           </h1>
 
           <p className="mt-6 text-base sm:text-lg text-slate-400 max-w-2xl leading-relaxed">
-            I build high-performance web applications with <span className="text-slate-200 font-medium">Next.js</span>, <span className="text-slate-200 font-medium">TypeScript</span>, and <span className="text-slate-200 font-medium">Tailwind CSS</span>. Focused on clean code, seamless UX, and modern web architectures.
+            Cybersecurity student specializing in <span className="text-blue-500 font-medium">Python</span>, <span className="text-yellow-400 font-medium">TypeScript</span>, and <span >development. Actively refining threat analysis and problem-solving skills through</span>.CTF challenges and sharpening hands-on <span className="text-red-600 font-medium">offensive</span> and <span className="text-green-500 font-medium">defensive</span> technical skills
           </p>
 
           {/* Action Buttons */}
@@ -46,18 +46,13 @@ export default function Hero() {
             >
               Let&apos;s Connect
             </Link>
-            <Link
-              href="#resume"
-              className="w-full sm:w-auto px-8 py-3.5 bg-slate-900 text-slate-200 border border-slate-800 font-semibold rounded-full hover:bg-slate-800 hover:text-white transition-all duration-200 text-center"
-            >
-              Download Resume
-            </Link>
+            
           </div>
         </div>
         <div className="md:col-span-5 flex justify-center items-center">
           <div className="relative w-64 h-128 sm:w-80 sm:h-80 md:w-full md:h-126">
             <Image
-              src="/profile.jpg" 
+              src="/zerotwo.jpg" 
               alt="Kenneth's Profile Picture"
               fill
               priority
