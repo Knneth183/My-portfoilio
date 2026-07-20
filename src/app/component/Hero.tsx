@@ -23,9 +23,9 @@ export default function Hero() {
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-6xl font-extrabold tracking-tight text-white leading-[1.1]">
-            Hi, I&apos;m <span className="text-transparent bg-clip-text bg-linear-to-r from-sky-400 to-blue-500">Kenenth</span>.
+            Hi, I&apos;m <span className="text-transparent bg-clip-text bg-linear-to-r from-sky-400 to-blue-500">Kenneth</span>.
             <br />
-            i'm a CyberSecurity Student.
+            i&apos;m a CyberSecurity Student.
           </h1>
 
           <p className="mt-6 text-base sm:text-lg text-slate-400 max-w-2xl leading-relaxed">
