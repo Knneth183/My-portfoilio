@@ -8,14 +8,13 @@ export default function Home() {
       <Header />
       
       <main className="max-w-7xl mx-auto px-6 space-y-20">
-        {/* HERO SECTION */}
+        
         <Hero />
 
         <TechStack />
 
-        {/* PROJECTS GRID */}
         <section id="projects" className="scroll-mt-20">
-          {/* Your ProjectCard mapping goes here */}
+          
         </section>
       </main>
     </div>

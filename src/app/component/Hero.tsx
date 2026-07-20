@@ -46,7 +46,6 @@ export default function Hero() {
             >
               Let&apos;s Connect
             </Link>
-            
           </div>
         </div>
         <div className="md:col-span-5 flex justify-center items-center">
