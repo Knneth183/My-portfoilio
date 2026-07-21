@@ -57,51 +57,76 @@ const languages: Language[] = [
 ];
 
 export default function TechStack() {
-  const marqueeItems = [...languages, ...languages];
-
-  return (
-    <section id="skills" className="py-12 scroll-mt-20 overflow-hidden">
-      <div className="max-w-6xl mx-auto px-6 mb-10">
-        {/* Section Heading */}
-        <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
-          Languages & <span className="text-sky-400">Technologies</span>
-        </h2>
-        <p className="mt-2 text-slate-400 text-base max-w-xl">
-          Core languages and technologies I work with daily.
+  const renderTechCard = (tech: Language, isDuplicate = false) => {
+    const Icon = tech.icon;
+    return (
+      <div
+        key={`${tech.name}${isDuplicate ? '-duplicate' : ''}`}
+        /* FIXED SIZE: w-[220px] on mobile, w-[240px] on desktop, p-5 padding */
+        className={`
+          w-[220px] sm:w-[240px] shrink-0 group/card cursor-pointer
+          rounded-2xl p-5 transition-all duration-300 ease-out
+          bg-slate-900/80 backdrop-blur-md border border-slate-800/80
+          hover:bg-slate-900/95 hover:border-slate-700
+          hover:-translate-y-2 hover:shadow-xl
+          ring-1 ring-white/5 ${tech.hoverColor}
+        `}
+      >
+        <div className="mb-3">
+          <span className="w-10 h-10 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center justify-center group-hover/card:scale-110 transition-transform">
+            <Icon className={`w-5 h-5 ${tech.iconColor}`} />
+          </span>
+        </div>
+        <h3 className="text-lg font-bold text-white transition-colors">
+          {tech.name}
+        </h3>
+        <p className="text-[11px] font-mono text-slate-400 mt-0.5 uppercase tracking-wider">
+          {tech.category}
         </p>
       </div>
+    );
+  };
 
-      {/* Continuous Moving Carousel Track */}
-      <div className="relative w-full flex overflow-x-hidden group mask-linear-fade">
-        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-slate-950 to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-slate-950 to-transparent z-10 pointer-events-none" />
+  return (
+    <section id="skills" className="relative py-12 scroll-mt-20 overflow-hidden">
+      {/* Background Video Layer */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover z-0"
+      >
+        <source src="/your-video-bg.mp4" type="video/mp4" />
+      </video>
+      <div className="relative z-10">
+        <div className="max-w-6xl mx-auto px-6 mb-10">
+          <h2 className="md:text-center text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+            Languages & <span className="text-sky-400">Technologies</span>
+          </h2>
+          <p className="mt-2 text-slate-400 text-base max-w-xl text-left md:text-center md:mx-auto">
+            Core languages and technologies I work with daily.
+          </p>
+        </div>
 
-        {/* Moving Container (Pauses when you hover over any card) */}
-        <div className="flex gap-6 animate-marquee group-hover:[animation-play-state:paused]">
-          {marqueeItems.map((tech, index) => {
-            const Icon = tech.icon;
-            return (
-              <div
-                key={`${tech.name}-${index}`}
-                className={`min-w-70 sm:min-w-75 max-w-[320px] bg-slate-900/80 border border-slate-800/80 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl shrink-0 group/card cursor-pointer ${tech.hoverColor}`}
-              >
-                {/* Header Icon */}
-                <div className="mb-4">
-                  <span className="w-12 h-12 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center justify-center group-hover/card:scale-110 transition-transform">
-                    <Icon className={`w-6 h-6 ${tech.iconColor}`} />
-                  </span>
-                </div>
+        {/* Marquee Track Container */}
+        <div className="relative w-full flex overflow-hidden group py-6">
+          {/* Fade Edges */}
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-slate-950 via-slate-950/80 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-slate-950 via-slate-950/80 to-transparent z-10 pointer-events-none" />
 
-                {/* Title & Category */}
-                <h3 className="text-xl font-bold text-white group-hover/card:text-inherit transition-colors">
-                  {tech.name}
-                </h3>
-                <p className="text-xs font-mono text-slate-500 mt-1 uppercase tracking-wider">
-                  {tech.category}
-                </p>
-              </div>
-            );
-          })}
+          {/* Track 1 */}
+          <div className="flex gap-5 pr-5 shrink-0 animate-marquee group-hover:[animation-play-state:paused] items-center">
+            {languages.map((tech) => renderTechCard(tech))}
+          </div>
+
+          {/* Track 2 (Duplicate for Seamless Loop) */}
+          <div
+            aria-hidden="true"
+            className="flex gap-5 pr-5 shrink-0 animate-marquee group-hover:[animation-play-state:paused] items-center"
+          >
+            {languages.map((tech) => renderTechCard(tech, true))}
+          </div>
         </div>
       </div>
     </section>

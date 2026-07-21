@@ -9,7 +9,7 @@ export default function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-slate-950/85 backdrop-blur-md border-b border-white/10">
+    <header className="sticky top-0 z-50">
       <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         
         <Link href="/" className="inline-flex items-center gap-3 text-2xl font-black text-white tracking-tight hover:text-red-500 transition-colors">
