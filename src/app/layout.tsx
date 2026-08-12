@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css"; 
+import { Geist, Geist_Mono, VT323 } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import "./globals.css";
 
+// Configure Geist Fonts
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -11,6 +12,13 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+// Configure Pixel Monospace Font
+const monoFont = VT323({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-mono",
 });
 
 export const metadata: Metadata = {
@@ -27,9 +35,9 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${monoFont.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col font-mono">
         {children}
         <Analytics />
       </body>
