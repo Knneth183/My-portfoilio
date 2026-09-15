@@ -1,7 +1,11 @@
+// app/layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, VT323 } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { Providers } from "./providers"; 
 import "./globals.css";
+import "@radix-ui/themes/styles.css";
+
 
 // Configure Geist Fonts
 const geistSans = Geist({
@@ -37,8 +41,10 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} ${monoFont.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-mono">
-        {children}
+      <body className="min-h-full flex flex-col font-mono bg-white dark:bg-zinc-950 text-gray-800 dark:text-zinc-200 transition-colors duration-300">
+        <Providers>
+          {children}
+        </Providers>
         <Analytics />
       </body>
     </html>

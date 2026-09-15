@@ -24,7 +24,7 @@ const languages: Language[] = [
     name: 'TypeScript',
     category: 'Frontend Language',
     icon: SiTypescript,
-    hoverColor: 'hover:border-blue-500/60 hover:shadow-blue-500/10 hover:text-blue-600',
+    hoverColor: 'hover:border-blue-500/60 hover:shadow-blue-500/10 hover:text-blue-600 dark:hover:border-blue-400/60',
     iconColor: 'text-[#3178C6]',
     projects: ['Nova Fintech Dashboard', 'Portfolio v2', 'E-Commerce Store'],
   },
@@ -32,7 +32,7 @@ const languages: Language[] = [
     name: 'JavaScript',
     category: 'Backend Language',
     icon: SiJavascript,
-    hoverColor: 'hover:border-amber-500/60 hover:shadow-amber-500/10 hover:text-amber-600',
+    hoverColor: 'hover:border-amber-500/60 hover:shadow-amber-500/10 hover:text-amber-600 dark:hover:border-amber-400/60',
     iconColor: 'text-[#F7DF1E]',
     projects: ['Text1', 'Text2', 'Text3'],
   },
@@ -40,7 +40,7 @@ const languages: Language[] = [
     name: 'Python',
     category: 'Scripting',
     icon: SiPython,
-    hoverColor: 'hover:border-emerald-500/60 hover:shadow-emerald-500/10 hover:text-emerald-600',
+    hoverColor: 'hover:border-emerald-500/60 hover:shadow-emerald-500/10 hover:text-emerald-600 dark:hover:border-emerald-400/60',
     iconColor: 'text-[#3776AB]',
     projects: ['Text1', 'Text2', 'Text3'],
   },
@@ -48,7 +48,7 @@ const languages: Language[] = [
     name: 'HTML5 & CSS3',
     category: 'Markup & Style',
     icon: SiHtml5,
-    hoverColor: 'hover:border-orange-500/60 hover:shadow-orange-500/10 hover:text-orange-600',
+    hoverColor: 'hover:border-orange-500/60 hover:shadow-orange-500/10 hover:text-orange-600 dark:hover:border-orange-400/60',
     iconColor: 'text-[#E34F26]',
     projects: ['Text1', 'Text2', 'Text3'],
   },
@@ -56,7 +56,7 @@ const languages: Language[] = [
     name: 'SQL',
     category: 'Database',
     icon: SiPostgresql,
-    hoverColor: 'hover:border-purple-500/60 hover:shadow-purple-500/10 hover:text-purple-600',
+    hoverColor: 'hover:border-purple-500/60 hover:shadow-purple-500/10 hover:text-purple-600 dark:hover:border-purple-400/60',
     iconColor: 'text-[#4169E1]',
     projects: ['Text1', 'Text2', 'Text3'],
   },
@@ -102,20 +102,20 @@ export default function TechStack() {
           <div
             className={`
               absolute inset-0 w-full h-full rounded-2xl p-5 flex flex-col justify-between
-              bg-white border border-gray-200
-              group-hover/card:bg-gray-50 group-hover/card:border-gray-300
+              bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800
+              group-hover/card:bg-gray-50 dark:group-hover/card:bg-zinc-800/80 group-hover/card:border-gray-300 dark:group-hover/card:border-zinc-700
               group-hover/card:shadow-xl transition-all
               [backface-visibility:hidden] ${tech.hoverColor}
             `}
           >
             <div>
               <div className="mb-3 flex justify-between items-center">
-                <span className="w-10 h-10 rounded-xl bg-gray-100 border border-gray-200 flex items-center justify-center group-hover/card:scale-110 transition-transform">
+                <span className="w-10 h-10 rounded-xl bg-gray-100 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 flex items-center justify-center group-hover/card:scale-110 transition-transform">
                   <Icon className={`w-5 h-5 ${tech.iconColor}`} />
                 </span>
               </div>
-              <h3 className="text-lg font-bold text-gray-900">{tech.name}</h3>
-              <p className="text-[11px] font-mono text-gray-500 mt-0.5 uppercase tracking-wider">
+              <h3 className="text-lg font-bold text-gray-900 dark:text-zinc-100">{tech.name}</h3>
+              <p className="text-[11px] font-mono text-gray-500 dark:text-zinc-400 mt-0.5 uppercase tracking-wider">
                 {tech.category}
               </p>
             </div>
@@ -123,10 +123,10 @@ export default function TechStack() {
 
           {/* BACK SIDE */}
           <div
-            className="absolute inset-0 w-full h-full rounded-2xl p-4 flex flex-col justify-between bg-gray-900 border border-sky-500/50 shadow-lg [backface-visibility:hidden] [transform:rotateY(180deg)] text-left"
+            className="absolute inset-0 w-full h-full rounded-2xl p-4 flex flex-col justify-between bg-gray-900 dark:bg-zinc-950 border border-sky-500/50 shadow-lg [backface-visibility:hidden] [transform:rotateY(180deg)] text-left"
           >
             <div>
-              <div className="flex items-center justify-between border-b border-gray-800 pb-2 mb-2">
+              <div className="flex items-center justify-between border-b border-gray-800 dark:border-zinc-800 pb-2 mb-2">
                 <span className="text-xs font-bold text-sky-400 uppercase tracking-wider">
                   {tech.name} Projects
                 </span>
@@ -135,7 +135,7 @@ export default function TechStack() {
                 {tech.projects.map((proj, idx) => (
                   <li
                     key={idx}
-                    className="text-xs text-gray-300 flex items-center gap-1.5 line-clamp-1"
+                    className="text-xs text-gray-300 dark:text-zinc-300 flex items-center gap-1.5 line-clamp-1"
                   >
                     <span className="w-1 h-1 rounded-full bg-sky-400 shrink-0" />
                     {proj}
@@ -150,13 +150,13 @@ export default function TechStack() {
   };
 
   return (
-    <section id="skills" className="relative py-12 scroll-mt-20 overflow-hidden bg-white">
+    <section id="skills" className="relative py-12 scroll-mt-20 overflow-hidden bg-white dark:bg-zinc-950 transition-colors duration-300">
       <div className="relative z-10">
         <div className="max-w-6xl mx-auto px-6 mb-10">
-          <h2 className="md:text-center text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">
-            Languages & <span className="text-sky-600">Frameworks</span>
+          <h2 className="md:text-center text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">
+            Languages & <span className="text-sky-600 dark:text-sky-400">Frameworks</span>
           </h2>
-          <p className="mt-2 text-gray-600 text-base max-w-xl text-left md:text-center md:mx-auto">
+          <p className="mt-2 text-gray-600 dark:text-zinc-400 text-base max-w-xl text-left md:text-center md:mx-auto">
             Languages and Frameworks I work with
           </p>
         </div>

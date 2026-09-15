@@ -3,6 +3,7 @@
     import React, { useRef, useState, useEffect } from 'react';
     import Image from 'next/image';
     import { FiExternalLink, FiGithub, FiX, FiGlobe, FiFigma, FiCheckCircle } from 'react-icons/fi';
+    //import { Avatar, Box, Card, Flex, Text } from '@radix-ui/themes/dist/cjs/components/index.js';
 
     export interface ProjectLink {
     label: string;
@@ -48,10 +49,6 @@
         project.imageUrl,
         ...(project.additionalImages || []),
     ];
-
-    useEffect(() => {
-        setActiveImage(project.imageUrl);
-    }, [project.imageUrl]);
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
@@ -102,7 +99,7 @@
             onClick={() => setIsOpen(true)}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className="group relative w-full cursor-pointer rounded-2xl bg-white border border-gray-200 p-4 transition-all duration-300 ease-out hover:border-cyan-500/50 hover:shadow-xl hover:shadow-cyan-500/10"
+            className="group relative w-full cursor-pointer rounded-2xl bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 p-4 transition-all duration-300 ease-out hover:border-cyan-500/50 dark:hover:border-cyan-500/50 hover:shadow-xl hover:shadow-cyan-500/10"
             style={{
             transformStyle: 'preserve-3d',
             transform: `perspective(1000px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
@@ -111,13 +108,13 @@
             <div
             className="pointer-events-none absolute inset-0 rounded-2xl transition-opacity duration-300 z-10"
             style={{
-                background: `radial-gradient(circle at ${glare.x}% ${glare.y}%, rgba(0,0,0,0.06) 0%, transparent 60%)`,
+                background: `radial-gradient(circle at ${glare.x}% ${glare.y}%, rgba(255,255,255,0.15) 0%, transparent 60%)`,
                 opacity: glare.opacity,
             }}
             />
 
             <div
-            className="relative h-48 w-full overflow-hidden rounded-xl bg-gray-100 border border-gray-200"
+            className="relative h-48 w-full overflow-hidden rounded-xl bg-gray-100 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700/60"
             style={{ transform: 'translateZ(20px)' }}
             >
             <Image
@@ -129,14 +126,14 @@
             </div>
 
             <div className="mt-5 space-y-3" style={{ transform: 'translateZ(30px)' }}>
-            <h3 className="text-xl font-bold tracking-tight text-gray-900 group-hover:text-cyan-600 transition-colors flex items-center justify-between">
+            <h3 className="text-xl font-bold tracking-tight text-gray-900 dark:text-zinc-100 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors flex items-center justify-between">
                 <span>{project.title}</span>
-                <span className="text-xs font-normal text-gray-400 group-hover:text-cyan-600 transition-colors shrink-0">
+                <span className="text-xs font-normal text-gray-400 dark:text-zinc-500 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors shrink-0">
                 Details →
                 </span>
             </h3>
 
-            <p className="text-sm text-gray-600 line-clamp-2 leading-relaxed">
+            <p className="text-sm text-gray-600 dark:text-zinc-400 line-clamp-2 leading-relaxed">
                 {project.description}
             </p>
 
@@ -157,7 +154,7 @@
                     className={`rounded-md px-2.5 py-1 text-xs font-medium transition-all duration-200 ${
                         isHighlighted
                         ? 'bg-cyan-500 text-white shadow-md shadow-cyan-500/30 scale-105'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200'
+                        : 'bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-zinc-300 hover:bg-gray-200 dark:hover:bg-zinc-700 border border-gray-200 dark:border-zinc-700'
                     }`}
                     >
                     {tech}
@@ -168,24 +165,24 @@
             </div>
         </div>
 
-        {/* LIGHT SCROLLABLE POPUP MODAL */}
+        {/* LIGHT / DARK SCROLLABLE POPUP MODAL */}
         {isOpen && (
             <div
-            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/40 backdrop-blur-md transition-all duration-300"
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/60 backdrop-blur-md transition-all duration-300"
             onClick={() => setIsOpen(false)}
             >
             <div
-                className="relative w-full max-w-4xl max-h-[90vh] flex flex-col rounded-2xl bg-white border border-gray-200 shadow-2xl overflow-hidden text-left"
+                className="relative w-full max-w-4xl max-h-[90vh] flex flex-col rounded-2xl bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 shadow-2xl overflow-hidden text-left"
                 onClick={(e) => e.stopPropagation()}
             >
                 {/* Modal Sticky Header */}
-                <div className="sticky top-0 z-20 flex items-center justify-between border-b border-gray-100 bg-white/90 px-6 py-4 backdrop-blur-md">
-                <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight truncate pr-4">
+                <div className="sticky top-0 z-20 flex items-center justify-between border-b border-gray-100 dark:border-zinc-800 bg-white/90 dark:bg-zinc-900/90 px-6 py-4 backdrop-blur-md">
+                <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white tracking-tight truncate pr-4">
                     {project.title}
                 </h2>
                 <button
                     onClick={() => setIsOpen(false)}
-                    className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 hover:text-gray-900 transition-colors shrink-0"
+                    className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-700 text-gray-500 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white transition-colors shrink-0"
                     aria-label="Close modal"
                 >
                     <FiX className="w-5 h-5" />
@@ -193,10 +190,10 @@
                 </div>
 
                 {/* Scrollable Body Content */}
-                <div className="flex-1 overflow-y-auto p-6 space-y-6 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+                <div className="flex-1 overflow-y-auto p-6 space-y-6 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-zinc-700 scrollbar-track-gray-100 dark:scrollbar-track-zinc-800">
                 {/* Media Gallery Section */}
                 <div className="space-y-3">
-                    <div className="relative h-64 sm:h-80 md:h-96 w-full overflow-hidden rounded-xl bg-gray-50 border border-gray-200">
+                    <div className="relative h-64 sm:h-80 md:h-96 w-full overflow-hidden rounded-xl bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700">
                     <Image
                         src={activeImage}
                         alt={project.title}
@@ -208,7 +205,7 @@
 
                     {/* Gallery Thumbnails */}
                     {galleryImages.length > 1 && (
-                    <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-thin scrollbar-thumb-gray-200">
+                    <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-thin scrollbar-thumb-gray-200 dark:scrollbar-thumb-zinc-800">
                         {galleryImages.map((img, idx) => (
                         <button
                             key={idx}
@@ -216,7 +213,7 @@
                             className={`relative w-20 h-14 shrink-0 rounded-lg overflow-hidden border-2 transition-all ${
                             activeImage === img
                                 ? 'border-cyan-500 opacity-100 scale-95 ring-2 ring-cyan-500/20'
-                                : 'border-gray-200 opacity-60 hover:opacity-100'
+                                : 'border-gray-200 dark:border-zinc-700 opacity-60 hover:opacity-100'
                             }`}
                         >
                             <Image
@@ -250,9 +247,9 @@
                         href={project.figmaUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium text-sm transition-all border border-gray-200 hover:border-purple-400 hover:text-purple-700"
+                        className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-700 text-gray-800 dark:text-zinc-200 font-medium text-sm transition-all border border-gray-200 dark:border-zinc-700 hover:border-purple-400 dark:hover:border-purple-500 hover:text-purple-700 dark:hover:text-purple-400"
                     >
-                        <FiFigma className="w-4 h-4 text-purple-600" />
+                        <FiFigma className="w-4 h-4 text-purple-600 dark:text-purple-400" />
                         Figma Design
                     </a>
                     )}
@@ -262,7 +259,7 @@
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium text-sm transition-all border border-gray-200"
+                        className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-700 text-gray-800 dark:text-zinc-200 font-medium text-sm transition-all border border-gray-200 dark:border-zinc-700"
                     >
                         <FiGithub className="w-4 h-4" />
                         Repository
@@ -271,27 +268,27 @@
                 </div>
 
                 {/* Information Grid Layout */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-gray-100">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-gray-100 dark:border-zinc-800">
                     {/* Main Content (2 Columns) */}
                     <div className="md:col-span-2 space-y-6">
                     <div>
-                        <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">
+                        <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-zinc-500 mb-2">
                         Overview
                         </h3>
-                        <p className="text-gray-700 leading-relaxed text-sm md:text-base">
+                        <p className="text-gray-700 dark:text-zinc-300 leading-relaxed text-sm md:text-base">
                         {project.longDescription || project.description}
                         </p>
                     </div>
 
                     {project.features && project.features.length > 0 && (
                         <div>
-                        <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">
+                        <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-zinc-500 mb-3">
                             Key Features
                         </h3>
                         <ul className="space-y-2">
                             {project.features.map((feature, idx) => (
-                            <li key={idx} className="flex items-start gap-2.5 text-sm text-gray-700">
-                                <FiCheckCircle className="w-4 h-4 text-cyan-600 shrink-0 mt-0.5" />
+                            <li key={idx} className="flex items-start gap-2.5 text-sm text-gray-700 dark:text-zinc-300">
+                                <FiCheckCircle className="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0 mt-0.5" />
                                 <span>{feature}</span>
                             </li>
                             ))}
@@ -301,16 +298,16 @@
                     </div>
 
                     {/* Sidebar Meta (1 Column) */}
-                    <div className="space-y-6 bg-gray-50 p-4 rounded-xl border border-gray-200/80 h-fit">
+                    <div className="space-y-6 bg-gray-50 dark:bg-zinc-800/50 p-4 rounded-xl border border-gray-200/80 dark:border-zinc-800 h-fit">
                     <div>
-                        <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">
+                        <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-zinc-500 mb-3">
                         Technologies
                         </h3>
                         <div className="flex flex-wrap gap-1.5">
                         {project.techStack.map((tech) => (
                             <span
                             key={tech}
-                            className="rounded-md bg-white border border-gray-200 px-2.5 py-1 text-xs font-medium text-cyan-700 shadow-sm"
+                            className="rounded-md bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 px-2.5 py-1 text-xs font-medium text-cyan-700 dark:text-cyan-400 shadow-sm"
                             >
                             {tech}
                             </span>
@@ -319,8 +316,8 @@
                     </div>
 
                     {project.links && project.links.length > 0 && (
-                        <div className="pt-4 border-t border-gray-200">
-                        <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">
+                        <div className="pt-4 border-t border-gray-200 dark:border-zinc-700">
+                        <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-zinc-500 mb-2">
                             Resource Links
                         </h3>
                         <div className="space-y-2">
@@ -330,9 +327,9 @@
                                 href={link.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-xs text-gray-600 hover:text-cyan-600 transition-colors flex items-center gap-1.5 font-medium"
+                                className="text-xs text-gray-600 dark:text-zinc-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors flex items-center gap-1.5 font-medium"
                             >
-                                <FiExternalLink className="w-3.5 h-3.5 text-cyan-600" />
+                                <FiExternalLink className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
                                 {link.label}
                             </a>
                             ))}
