@@ -20,8 +20,6 @@ const technologies = [
 const socialLinks = [
   { name: 'github', href: 'https://github.com/Knneth183' },
   { name: 'linkedin', href: 'https://www.linkedin.com/in/kenneth-lim-aa6637334/' },
-  { name: 'instagram', href: 'https://instagram.com' },
-  { name: 'email', href: 'mailto:Kennethlim183@gmail.com' },
 ];
 
 export default function Hero() {
@@ -55,17 +53,15 @@ export default function Hero() {
         {/* Right Column: Bio & Links */}
         <div className="md:col-span-7 flex flex-col justify-center space-y-6">
           <h1 className="dark:text-neutral-100 text-4xl md:text-5xl font-mono tracking-tight font-medium text-neutral-900">
-            kenneth Lim
+            Kenneth Lim
           </h1>
 
           <div className=" dark:text-neutral-200 space-y-4 text-neutral-600 text-base md:text-lg leading-relaxed max-w-xl">
             <p>
-              I&apos;m a <span className="dark:text-amber-200 text-neutral-900">CyberSecurity Student</span>. And I build modern web &amp; mobile apps, 
-              and these days I&apos;m focused on Cybersecurity.
+              I&apos;m an Information Technology student at <span className="dark:text-amber-200 text-neutral-900">PHINMA University of Pangasinan</span>, specializing in Cybersecurity. I build web and mobile applications as part of my studies and project work.
             </p>
             <p>
-              Right now I&apos;m building cool new stuff every day. I love turning 
-              rough ideas into things people actually use.
+              My projects include a barangay infrastructure monitoring system, a hotel tracking platform, and an AI-assisted inventory management system.
             </p>
           </div>
           <div className="dark:text-amber-200 pt-2 flex flex-wrap gap-x-6 gap-y-2 font-mono text-sm text-neutral-600">

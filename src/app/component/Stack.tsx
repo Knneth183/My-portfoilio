@@ -6,25 +6,11 @@
     const techStackData: TechCategory[] = [
     {
         title: 'FRONTEND',
-        items: [
-        'JavaScript',
-        'TypeScript',
-        'React',
-        'Next.js',
-        'Python',
-        'Tailwind CSS',
-        ],
+        items: ['JavaScript', 'TypeScript', 'React', 'Vite', 'HTML', 'CSS', 'Tailwind CSS'],
     },
     {
         title: 'BACKEND',
-        items: [
-        'Node.js',
-        'Python',
-        'Java',
-        'PHP',
-        'PostgreSQL',
-        'MySQL',
-        ],
+        items: ['Node.js', 'Express', 'Python', 'PHP', 'Kotlin', 'XML', 'MongoDB', 'Supabase', 'PostgreSQL', 'MySQL'],
     },
     ];
 

@@ -5,72 +5,43 @@ import Link from 'next/link';
 import Hero from "./component/Hero";
 import TechStack from "./component/TechStack";
 import { ProjectCard } from "./component/ProjectCard";
-import PixelSidebar from './component/Pixelslidebar';
 import '@radix-ui/themes/styles.css';
 import { MeteorsDemo } from './component/meteor';
 
 const technologies = [
   "Python",
-  "BASH",
   "JavaScript",
-  "HTML",
-  "React Js",
-  "Next Js",
+  "React",
+  "PHP",
+  "Kotlin",
+  "TypeScript",
   "Tailwind CSS",
 ];
 
 const PROJECTS_DATA = [
   {
-    id: '1',
-    title: 'Project 1 under construction',
-    imageUrl: '/project_card/image3.jpg',
-    description: 'Under construction',
-    techStack: ['stack1', 'stack2', 'stack3'],
-    className: 'md:col-span-2', // Spans 2 columns on medium screens
-  },
-  {
     id: '2',
-    title: 'Project SERVE Infrastructure Monitoring System Android App',
-    description: 'Created a complete visual language and dynamic design system for Nova, a Next.js fetch platform. Focused on high-contrast UI assets, custom micro-illustrations, and dark-mode design components to build brand trust and modern appeal',
+    title: 'Project SERVE: Barangay Infrastructure Monitoring System',
+    description: 'A mobile app and web dashboard for community infrastructure projects, resident records, and service requests.',
     imageUrl: '/project_card/project2.jpg',
-    techStack: ['Figma', 'XML', 'KOTLIN'],
-    liveUrl: "#",
+    techStack: ['Kotlin', 'XML', 'Supabase'],
     figmaUrl: "https://www.figma.com/design/NEBhHeq7d3dK06aIG6JKti/Project-SERVE--The-Barangay-2-3-Nueva--Dagupan-City-Integrated-Infrastructure-Monitoring-System-APP?node-id=0-1&t=OjhbfnTLH4dpHyX2-1",
-    githubUrl: "#",
     className: 'col-span-1',
   },
   {
     id: '3',
-    title: 'Project 3 under construction',
-    imageUrl: '/project_card/image 4.jpg',
-    description: 'Under construction',
-    techStack: ['stack1', 'stack2', 'stack3'],
+    title: 'ShelfLife-AI',
+    imageUrl: '/project_card/image5.jpg',
+    description: 'An AI-powered inventory and expiration tracking system with waste prediction and restocking support.',
+    techStack: ['TypeScript', 'React', 'Node.js', 'MongoDB'],
     className: 'col-span-1',
   },
 ];
 
 export default function Home() {
   const [hoveredTech, setHoveredTech] = useState<string | null>(null);
-  const [isCollapsed, setIsCollapsed] = useState(true);
-
   return (
-    <div className="flex w-full min-h-screen bg-white dark:bg-zinc-950 text-gray-900 dark:text-zinc-100 font-sans transition-colors duration-300">
-      
-      {/* Sidebar */}
-      <aside 
-        className={`sticky top-0 z-50 h-screen shrink-0 transition-all duration-300 ease-in-out ${
-          isCollapsed ? 'w-16' : 'w-64'
-        }`}
-      >
-        <PixelSidebar 
-          isCollapsed={isCollapsed} 
-          setIsCollapsed={setIsCollapsed} 
-        />
-      </aside>
-
-      {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-x-hidden transition-all duration-300"> 
-        <main className="max-w-6xl w-full mx-auto px-6 sm:px-10 md:px-16 lg:px-20 space-y-5 flex-1 py-8">
+    <main className="max-w-6xl w-full mx-auto px-6 sm:px-10 md:px-16 lg:px-20 space-y-5 flex-1 py-8">
           <Hero />
           
           {/* Header Row */}
@@ -119,8 +90,6 @@ export default function Home() {
           <TechStack />
 
           
-        </main>
-      </div>
-    </div>
+    </main>
   );
 }

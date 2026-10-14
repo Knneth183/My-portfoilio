@@ -172,17 +172,20 @@
             onClick={() => setIsOpen(false)}
             >
             <div
-                className="relative w-full max-w-4xl max-h-[90vh] flex flex-col rounded-2xl bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 shadow-2xl overflow-hidden text-left"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby={`project-title-${project.id}`}
+                className="relative flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-3xl border border-white/70 bg-white text-left shadow-[0_32px_100px_-24px_rgba(0,0,0,0.5)] dark:border-zinc-700 dark:bg-zinc-950"
                 onClick={(e) => e.stopPropagation()}
             >
                 {/* Modal Sticky Header */}
-                <div className="sticky top-0 z-20 flex items-center justify-between border-b border-gray-100 dark:border-zinc-800 bg-white/90 dark:bg-zinc-900/90 px-6 py-4 backdrop-blur-md">
-                <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white tracking-tight truncate pr-4">
+                <div className="sticky top-0 z-20 flex items-center justify-between gap-4 border-b border-neutral-200/80 bg-white/90 px-5 py-4 backdrop-blur-xl sm:px-8 sm:py-5 dark:border-zinc-800 dark:bg-zinc-950/90">
+                <div className="min-w-0"><p className="mb-1 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-700 dark:text-cyan-400">Project case study</p><h2 id={`project-title-${project.id}`} className="truncate text-lg font-semibold tracking-tight text-gray-900 sm:text-2xl dark:text-white">
                     {project.title}
-                </h2>
+                </h2></div>
                 <button
                     onClick={() => setIsOpen(false)}
-                    className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-700 text-gray-500 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white transition-colors shrink-0"
+                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-neutral-100 text-neutral-600 transition-colors hover:bg-neutral-200 hover:text-neutral-950 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700 dark:hover:text-white"
                     aria-label="Close modal"
                 >
                     <FiX className="w-5 h-5" />
@@ -190,15 +193,15 @@
                 </div>
 
                 {/* Scrollable Body Content */}
-                <div className="flex-1 overflow-y-auto p-6 space-y-6 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-zinc-700 scrollbar-track-gray-100 dark:scrollbar-track-zinc-800">
+                <div className="flex-1 space-y-7 overflow-y-auto p-5 sm:space-y-8 sm:p-8">
                 {/* Media Gallery Section */}
                 <div className="space-y-3">
-                    <div className="relative h-64 sm:h-80 md:h-96 w-full overflow-hidden rounded-xl bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700">
+                    <div className="relative h-[clamp(16rem,48vw,32rem)] w-full overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-950 shadow-inner dark:border-zinc-800">
                     <Image
                         src={activeImage}
                         alt={project.title}
                         fill
-                        className="object-cover transition-all duration-300"
+                        className="object-contain p-2 transition-all duration-300 sm:p-4"
                         priority
                     />
                     </div>
@@ -210,7 +213,7 @@
                         <button
                             key={idx}
                             onClick={() => setActiveImage(img)}
-                            className={`relative w-20 h-14 shrink-0 rounded-lg overflow-hidden border-2 transition-all ${
+                            className={`relative h-16 w-24 shrink-0 overflow-hidden rounded-xl border transition-all ${
                             activeImage === img
                                 ? 'border-cyan-500 opacity-100 scale-95 ring-2 ring-cyan-500/20'
                                 : 'border-gray-200 dark:border-zinc-700 opacity-60 hover:opacity-100'
@@ -229,13 +232,13 @@
                 </div>
 
                 {/* Action Buttons Bar */}
-                <div className="flex flex-wrap items-center gap-3 pt-2">
+                <div className="flex flex-wrap items-center gap-2.5">
                     {project.liveUrl && (
                     <a
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-600 text-white font-semibold text-sm shadow-md shadow-cyan-500/20 transition-all hover:scale-[1.02] active:scale-95"
+                        className="inline-flex items-center gap-2 rounded-xl bg-cyan-600 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-cyan-900/15 transition hover:-translate-y-0.5 hover:bg-cyan-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2"
                     >
                         <FiGlobe className="w-4 h-4" />
                         Visit Website
@@ -247,7 +250,7 @@
                         href={project.figmaUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-700 text-gray-800 dark:text-zinc-200 font-medium text-sm transition-all border border-gray-200 dark:border-zinc-700 hover:border-purple-400 dark:hover:border-purple-500 hover:text-purple-700 dark:hover:text-purple-400"
+                        className="inline-flex items-center gap-2 rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm font-medium text-neutral-700 transition hover:-translate-y-0.5 hover:border-purple-300 hover:text-purple-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:border-purple-700 dark:hover:text-purple-300"
                     >
                         <FiFigma className="w-4 h-4 text-purple-600 dark:text-purple-400" />
                         Figma Design
@@ -259,7 +262,7 @@
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-700 text-gray-800 dark:text-zinc-200 font-medium text-sm transition-all border border-gray-200 dark:border-zinc-700"
+                        className="inline-flex items-center gap-2 rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm font-medium text-neutral-700 transition hover:-translate-y-0.5 hover:border-neutral-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200"
                     >
                         <FiGithub className="w-4 h-4" />
                         Repository
@@ -268,26 +271,26 @@
                 </div>
 
                 {/* Information Grid Layout */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-gray-100 dark:border-zinc-800">
+                <div className="grid grid-cols-1 gap-5 border-t border-neutral-200 pt-6 md:grid-cols-3 dark:border-zinc-800">
                     {/* Main Content (2 Columns) */}
-                    <div className="md:col-span-2 space-y-6">
+                    <div className="space-y-6 rounded-2xl border border-neutral-200 p-5 sm:p-6 md:col-span-2 dark:border-zinc-800">
                     <div>
-                        <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-zinc-500 mb-2">
+                        <h3 className="mb-3 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-neutral-400 dark:text-zinc-500">
                         Overview
                         </h3>
-                        <p className="text-gray-700 dark:text-zinc-300 leading-relaxed text-sm md:text-base">
+                        <p className="text-sm leading-7 text-neutral-600 sm:text-base dark:text-zinc-300">
                         {project.longDescription || project.description}
                         </p>
                     </div>
 
                     {project.features && project.features.length > 0 && (
                         <div>
-                        <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-zinc-500 mb-3">
+                        <h3 className="mb-3 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-neutral-400 dark:text-zinc-500">
                             Key Features
                         </h3>
                         <ul className="space-y-2">
                             {project.features.map((feature, idx) => (
-                            <li key={idx} className="flex items-start gap-2.5 text-sm text-gray-700 dark:text-zinc-300">
+                            <li key={idx} className="flex items-start gap-2.5 text-sm leading-6 text-neutral-600 dark:text-zinc-300">
                                 <FiCheckCircle className="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0 mt-0.5" />
                                 <span>{feature}</span>
                             </li>
@@ -298,16 +301,16 @@
                     </div>
 
                     {/* Sidebar Meta (1 Column) */}
-                    <div className="space-y-6 bg-gray-50 dark:bg-zinc-800/50 p-4 rounded-xl border border-gray-200/80 dark:border-zinc-800 h-fit">
+                    <div className="h-fit space-y-6 rounded-2xl border border-neutral-200 bg-neutral-50 p-5 dark:border-zinc-800 dark:bg-zinc-900/60">
                     <div>
-                        <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-zinc-500 mb-3">
+                        <h3 className="mb-3 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-neutral-400 dark:text-zinc-500">
                         Technologies
                         </h3>
                         <div className="flex flex-wrap gap-1.5">
                         {project.techStack.map((tech) => (
                             <span
                             key={tech}
-                            className="rounded-md bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 px-2.5 py-1 text-xs font-medium text-cyan-700 dark:text-cyan-400 shadow-sm"
+                            className="rounded-lg border border-neutral-200 bg-white px-3 py-1.5 text-xs font-medium text-neutral-700 dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-200"
                             >
                             {tech}
                             </span>

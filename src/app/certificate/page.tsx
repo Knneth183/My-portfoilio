@@ -1,32 +1,5 @@
-    'use client';
+import Link from 'next/link';
 
-    import React, { useState } from 'react';
-    import PixelSidebar from '@/app/component/Pixelslidebar';
-    import Certificate from '@/app/component/Certificate';
-
-    export default function CertificatePage() {
-    const [isCollapsed, setIsCollapsed] = useState(true);
-
-    return (
-        <div className="flex w-full min-h-screen bg-white dark:bg-zinc-950 text-gray-900 dark:text-zinc-100 font-sans transition-colors duration-300">
-        {/* Sidebar */}
-        <aside 
-            className={`sticky top-0 z-50 h-screen shrink-0 transition-all duration-300 ease-in-out ${
-            isCollapsed ? 'w-16' : 'w-64'
-            }`}
-        >
-            <PixelSidebar 
-            isCollapsed={isCollapsed} 
-            setIsCollapsed={setIsCollapsed} 
-            />
-        </aside>
-
-        {/* Main Content Area */}
-        <div className="flex-1 flex flex-col min-w-0 overflow-x-hidden transition-all duration-300"> 
-            <main className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1">
-            <Certificate />
-            </main>
-        </div>
-        </div>
-    );
-    }
+export default function CertificatePage() {
+  return <main className="mx-auto w-full max-w-6xl space-y-8 px-6 py-12 sm:px-10"><header className="space-y-3"><p className="font-mono text-sm uppercase tracking-widest text-neutral-400">Learning milestones</p><h1 className="text-4xl font-semibold tracking-tight">Certifications</h1><p className="max-w-2xl text-neutral-500 dark:text-zinc-400">Professional credentials and completed training.</p></header><article className="rounded-2xl border border-neutral-200 p-6 dark:border-zinc-800"><div className="flex flex-wrap items-start justify-between gap-4"><div><p className="font-mono text-xs uppercase tracking-widest text-cyan-700 dark:text-cyan-400">Cisco Networking Academy</p><h2 className="mt-3 text-xl font-semibold">Introduction to Cybersecurity</h2><p className="mt-1 text-sm text-neutral-500 dark:text-zinc-400">Student-level course completion credential</p></div><time dateTime="2026-05-28" className="rounded-full bg-neutral-100 px-3 py-1.5 font-mono text-xs text-neutral-600 dark:bg-zinc-800 dark:text-zinc-300">May 28, 2026</time></div><p className="mt-5 max-w-3xl text-sm leading-6 text-neutral-600 dark:text-zinc-300">Covered online safety and cybersecurity fundamentals, common threats and vulnerabilities, personal protection practices, and ways organizations defend their operations.</p><Link href="/certificates/cisco-introduction-to-cybersecurity.pdf" target="_blank" className="mt-6 inline-flex items-center gap-2 rounded-xl bg-cyan-600 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-cyan-700">View certificate <span aria-hidden="true">↗</span></Link></article><Link href="/stack" className="inline-flex text-sm font-medium text-cyan-700 hover:text-cyan-900 dark:text-cyan-400 dark:hover:text-cyan-300">View my technical skills <span aria-hidden="true" className="ml-2">→</span></Link></main>;
+}

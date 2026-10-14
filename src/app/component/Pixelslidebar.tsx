@@ -1,171 +1,64 @@
-    'use client';
+'use client';
 
-    import React, { useEffect, useState } from 'react';
-    import {
-    BookOpen,
-    Home,
-    Users,
-    Briefcase,
-    ChevronLeft,
-    ChevronRight,
-    Folder,
-    Award,
-    Layers,
-    Sun,
-    Moon,
-    } from 'lucide-react';
-    import Link from 'next/link';
-    import { useTheme } from 'next-themes'; 
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useTheme } from 'next-themes';
+import { ArrowRight, Award, BookOpen, Briefcase, ChevronLeft, ChevronRight, Home, Laptop, Layers, Moon, Sun, Users } from 'lucide-react';
+import ViewerPresence from './ViewerPresence';
 
-    interface PixelSidebarProps {
-    isCollapsed: boolean;
-    setIsCollapsed: (value: boolean) => void;
-    }
+interface PixelSidebarProps {
+  isCollapsed: boolean;
+  onToggleCollapse: () => void;
+}
 
-    export default function PixelSidebar({ isCollapsed, setIsCollapsed }: PixelSidebarProps) {
-    const { setTheme, resolvedTheme } = useTheme();
-    const [mounted, setMounted] = useState(false);
-    useEffect(() => {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setMounted(true);
-    }, []);
+const groups = [
+  [{ label: 'Education', href: '/education', Icon: BookOpen }, { label: 'Home', href: '/', Icon: Home }],
+  [{ label: 'Projects', href: '/projects', Icon: Users }, { label: 'Certification', href: '/certificate', Icon: Briefcase }],
+  [{ label: 'Experience', href: '/experience', Icon: Award }, { label: 'Stack', href: '/stack', Icon: Layers }],
+];
 
-    const isDark = resolvedTheme === 'dark';
-    return (
-        <div
-        className={`w-full h-full bg-white dark:bg-zinc-950 border-r border-gray-200 dark:border-zinc-800 text-gray-800 dark:text-zinc-200 flex flex-col justify-between font-mono text-xs select-none overflow-x-hidden transition-colors duration-300 ${
-            isCollapsed ? 'p-3' : 'p-5'
-        }`}
-        >
-        {/* Top Navigation Content */}
-        <div className="space-y-6">
-            {/* Sidebar Header & Toggle */}
-            <div className="flex items-center justify-between min-h-8">
-            {!isCollapsed && (
-                <h1 className="text-base font-bold tracking-wider text-black dark:text-white truncate">
-                <Link href="/">Kenneth Lim</Link>
-                </h1>
-            )}
-            <button
-                onClick={() => setIsCollapsed(!isCollapsed)}
-                className="p-1.5 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-gray-600 hover:text-black dark:text-zinc-400 dark:hover:text-white transition-colors mx-auto"
-                title={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-                aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-            >
-                {isCollapsed ? (
-                <ChevronRight className="w-4 h-4" />
-                ) : (
-                <ChevronLeft className="w-4 h-4" />
-                )}
-            </button>
-            </div>
+export default function PixelSidebar({ isCollapsed, onToggleCollapse }: PixelSidebarProps) {
+  const { setTheme, resolvedTheme, theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const pathname = usePathname();
+  useEffect(() => { setMounted(true); }, []);
+  const isDark = resolvedTheme === 'dark';
 
-            {/* Navigation Items */}
-            <nav className="space-y-2.5">
-            <a
-                href="#education"
-                className="flex items-center gap-3 text-gray-600 dark:text-zinc-400 hover:text-black dark:hover:text-white hover:bg-gray-50 dark:hover:bg-zinc-800/60 p-1.5 rounded-md transition-colors"
-                title="Resources"
-            >
-                <BookOpen className="w-4 h-4 shrink-0" />
-                {!isCollapsed && <span className="truncate">Education</span>}
-            </a>
-
-            <Link
-            href="/"
-            className="flex items-center gap-3 text-gray-600 dark:text-zinc-400 hover:text-black dark:hover:text-white hover:bg-gray-50 dark:hover:bg-zinc-800/60 p-1.5 rounded-md transition-colors"
-            title="Home"
-            >
-            <Home className="w-4 h-4 shrink-0" />
-            {!isCollapsed && <span className="truncate">Home</span>}
-            </Link>
-            </nav>
-
-            {/* Secondary Group */}
-            <div className="pt-2 border-t border-gray-100 dark:border-zinc-800/80 space-y-2.5">
-            <a
-                href="#projects"
-                className="flex items-center gap-3 text-gray-600 dark:text-zinc-400 hover:text-black dark:hover:text-white hover:bg-gray-50 dark:hover:bg-zinc-800/60 p-1.5 rounded-md transition-colors"
-                title="Projects"
-            >
-                <Users className="w-4 h-4 shrink-0" />
-                {!isCollapsed && <span className="truncate">Projects</span>}
-            </a>
-
-            <a
-                href="/certificate"
-                className="flex items-center gap-3 text-gray-600 dark:text-zinc-400 hover:text-black dark:hover:text-white hover:bg-gray-50 dark:hover:bg-zinc-800/60 p-1.5 rounded-md transition-colors"
-                title="Certification"
-            >
-                <Briefcase className="w-4 h-4 shrink-0" />
-                {!isCollapsed && <span className="truncate">Certification</span>}
-            </a>
-            </div>
-
-            {/* Sections */}
-            <div className="pt-2 border-t border-gray-100 dark:border-zinc-800/80 space-y-2.5">
-            <a
-                href="#projects"
-                className="flex items-center gap-3 text-gray-600 dark:text-zinc-400 hover:text-black dark:hover:text-white hover:bg-gray-50 dark:hover:bg-zinc-800/60 p-1.5 rounded-md transition-colors"
-                title="Projects"
-            >
-                <Folder className="w-4 h-4 shrink-0" />
-                {!isCollapsed && <span className="truncate">Scripts</span>}
-            </a>
-
-            <a
-                href="#experience"
-                className="flex items-center gap-3 text-gray-600 dark:text-zinc-400 hover:text-black dark:hover:text-white hover:bg-gray-50 dark:hover:bg-zinc-800/60 p-1.5 rounded-md transition-colors"
-                title="Experience"
-            >
-                <Award className="w-4 h-4 shrink-0" />
-                {!isCollapsed && <span className="truncate">Experience</span>}
-            </a>
-
-            <a
-                href="/stack"
-                className="flex items-center gap-3 text-gray-600 dark:text-zinc-400 hover:text-black dark:hover:text-white hover:bg-gray-50 dark:hover:bg-zinc-800/60 p-1.5 rounded-md transition-colors"
-                title="Stack"
-            >
-                <Layers className="w-4 h-4 shrink-0" />
-                {!isCollapsed && <span className="truncate">Stack</span>}
-            </a>
-            </div>
+  return (
+    <div className={`flex h-full w-full flex-col border-r border-neutral-200 bg-white font-mono text-sm text-neutral-700 transition-colors dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-200 ${isCollapsed ? 'items-center p-1.5' : 'px-7 py-6'}`}>
+      <div className={`${isCollapsed ? 'w-full' : 'flex min-h-0 flex-1 flex-col'}`}>
+        <div className={`flex min-h-7 items-center ${isCollapsed ? 'justify-center' : 'px-1'}`}>
+          {!isCollapsed && <h1 className="truncate text-lg font-normal tracking-wide text-neutral-950 dark:text-white"><Link href="/">Kenneth Lim</Link></h1>}
         </div>
-
-        {/* Dark / Light Mode Toggle */}
-        <div className="pt-4 mt-auto border-t border-gray-100 dark:border-zinc-800/80">
-        <button
-            type="button"
-            onClick={() => setTheme(isDark ? 'light' : 'dark')}
-            className="w-full flex items-center gap-3 text-gray-600 dark:text-zinc-400 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-zinc-800/60 p-1.5 rounded-md transition-colors"
-            title={
-            mounted
-                ? isDark
-                ? 'Switch to Light Mode'
-                : 'Switch to Dark Mode'
-                : 'Toggle Theme'
-            }
-            aria-label="Toggle Theme"
-            suppressHydrationWarning
-        >
-            {mounted ? (
-            isDark ? (
-                <Sun className="w-4 h-4 shrink-0 text-amber-400" />
-            ) : (
-                <Moon className="w-4 h-4 shrink-0 text-slate-700 dark:text-zinc-300" />
-            )
-            ) : (
-            <Moon className="w-4 h-4 shrink-0 opacity-50" />
-            )}
-
-            {!isCollapsed && (
-            <span className="truncate">
-                {mounted ? (isDark ? 'Light Mode' : 'Dark Mode') : 'Theme'}
-            </span>
-            )}
-                </button>
+        <nav aria-label="Portfolio navigation" className={`mt-5 overflow-y-auto overscroll-contain ${isCollapsed ? 'space-y-3' : 'max-h-[min(62vh,34rem)] space-y-3 pr-1 [scrollbar-color:#c4c4c4_#f4f4f5] [scrollbar-width:thin]'}`}>
+          {groups.map((group, index) => <div key={index} className={`space-y-0 ${index ? 'border-t border-neutral-100 pt-2.5 dark:border-zinc-800' : ''}`}>
+            {group.map(({ label, href, Icon }) => {
+              const active = pathname === href;
+              return <Link key={href} href={href} title={label} aria-current={active ? 'page' : undefined} className={`flex items-center gap-2.5 rounded-md px-1 py-1 transition-colors ${active ? 'text-neutral-950 dark:text-white' : 'text-neutral-600 hover:text-neutral-950 dark:text-zinc-400 dark:hover:text-white'} ${isCollapsed ? 'justify-center' : ''}`}>
+                {active && !isCollapsed && <ArrowRight aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />}
+                <Icon className="h-3.5 w-3.5 shrink-0" />{!isCollapsed && <span className="truncate">{label}</span>}
+              </Link>;
+            })}
+          </div>)}
+        </nav>
+        <div className={`mt-auto ${isCollapsed ? 'pt-3' : 'pt-5'}`}>
+          <ViewerPresence isCollapsed={isCollapsed} />
         </div>
+      </div>
+      <div className={`mt-auto border-t border-neutral-200 pt-4 dark:border-zinc-800 ${isCollapsed ? 'w-full' : ''}`}>
+        <div className={`flex items-center ${isCollapsed ? 'flex-col gap-2' : 'justify-between gap-2'}`}>
+          {!isCollapsed && <div className="inline-flex items-center gap-0.5 rounded-full border border-neutral-200 p-1 dark:border-zinc-700" aria-label="Color theme">
+            <button type="button" onClick={() => setTheme('system')} className={`rounded-full p-2 transition-colors ${mounted && theme === 'system' ? 'bg-neutral-100 text-neutral-950 dark:bg-zinc-800 dark:text-white' : 'text-neutral-400 hover:text-neutral-800 dark:hover:text-zinc-200'}`} aria-label="System theme" title="System theme"><Laptop className="h-4 w-4" /></button>
+            <button type="button" onClick={() => setTheme('light')} className={`rounded-full p-2 transition-colors ${mounted && resolvedTheme === 'light' ? 'bg-neutral-100 text-neutral-950 dark:bg-zinc-800 dark:text-white' : 'text-neutral-400 hover:text-neutral-800 dark:hover:text-zinc-200'}`} aria-label="Light theme" title="Light theme"><Sun className="h-4 w-4" /></button>
+            <button type="button" onClick={() => setTheme('dark')} className={`rounded-full p-2 transition-colors ${mounted && isDark ? 'bg-neutral-100 text-neutral-950 dark:bg-zinc-800 dark:text-white' : 'text-neutral-400 hover:text-neutral-800 dark:hover:text-zinc-200'}`} aria-label="Dark theme" title="Dark theme"><Moon className="h-4 w-4" /></button>
+          </div>}
+          <button type="button" onClick={onToggleCollapse} className="flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 text-neutral-600 transition-colors hover:bg-neutral-100 hover:text-neutral-950 dark:border-zinc-700 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white" aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'} title={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}>
+            {isCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
+          </button>
+        </div>
+        {!isCollapsed && <p className="mt-3 px-1 text-[11px] leading-4 text-neutral-400 dark:text-zinc-500">Portfolio · Cybersecurity &amp; development</p>}
+      </div>
     </div>
-    );
-    }
+  );
+}

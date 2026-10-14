@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, VT323 } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { Providers } from "./providers"; 
+import SiteShell from "./component/SiteShell";
 import "./globals.css";
 import "@radix-ui/themes/styles.css";
 
@@ -43,7 +44,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col font-mono bg-white dark:bg-zinc-950 text-gray-800 dark:text-zinc-200 transition-colors duration-300">
         <Providers>
-          {children}
+          <SiteShell>{children}</SiteShell>
         </Providers>
         <Analytics />
       </body>

@@ -26,15 +26,15 @@ const languages: Language[] = [
     icon: SiTypescript,
     hoverColor: 'hover:border-blue-500/60 hover:shadow-blue-500/10 hover:text-blue-600 dark:hover:border-blue-400/60',
     iconColor: 'text-[#3178C6]',
-    projects: ['Nova Fintech Dashboard', 'Portfolio v2', 'E-Commerce Store'],
+    projects: ['ShelfLife-AI'],
   },
   {
     name: 'JavaScript',
-    category: 'Backend Language',
+    category: 'Programming Language',
     icon: SiJavascript,
     hoverColor: 'hover:border-amber-500/60 hover:shadow-amber-500/10 hover:text-amber-600 dark:hover:border-amber-400/60',
     iconColor: 'text-[#F7DF1E]',
-    projects: ['Text1', 'Text2', 'Text3'],
+    projects: ['StaySavvy Hotel Tracking System'],
   },
   {
     name: 'Python',
@@ -42,7 +42,7 @@ const languages: Language[] = [
     icon: SiPython,
     hoverColor: 'hover:border-emerald-500/60 hover:shadow-emerald-500/10 hover:text-emerald-600 dark:hover:border-emerald-400/60',
     iconColor: 'text-[#3776AB]',
-    projects: ['Text1', 'Text2', 'Text3'],
+    projects: ['FinWise Financial Advising App'],
   },
   {
     name: 'HTML5 & CSS3',
@@ -50,7 +50,7 @@ const languages: Language[] = [
     icon: SiHtml5,
     hoverColor: 'hover:border-orange-500/60 hover:shadow-orange-500/10 hover:text-orange-600 dark:hover:border-orange-400/60',
     iconColor: 'text-[#E34F26]',
-    projects: ['Text1', 'Text2', 'Text3'],
+    projects: ['FurEverPets Shop', 'StaySavvy Hotel Tracking System'],
   },
   {
     name: 'SQL',
@@ -58,7 +58,7 @@ const languages: Language[] = [
     icon: SiPostgresql,
     hoverColor: 'hover:border-purple-500/60 hover:shadow-purple-500/10 hover:text-purple-600 dark:hover:border-purple-400/60',
     iconColor: 'text-[#4169E1]',
-    projects: ['Text1', 'Text2', 'Text3'],
+    projects: ['StaySavvy Hotel Tracking System', 'Project SERVE'],
   },
 ];
 
