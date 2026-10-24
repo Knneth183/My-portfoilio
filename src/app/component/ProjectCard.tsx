@@ -16,6 +16,7 @@
     description: string;
     longDescription?: string;
     imageUrl: string;
+    cardImageUrl?: string;
     additionalImages?: string[];
     techStack: string[];
     githubUrl?: string;
@@ -128,15 +129,15 @@
             />
 
             <div
-            className={`relative aspect-square ${compact ? 'w-20' : 'w-24 sm:w-28'} self-start overflow-hidden rounded-2xl border border-neutral-200 ${project.id === 'shelflife' || project.id === 'staysavvy' ? 'bg-white' : 'bg-gray-100 dark:bg-zinc-800'} shadow-sm dark:border-zinc-700`}
+            className={`relative aspect-square ${compact ? 'w-20' : 'w-24 sm:w-28'} self-start overflow-hidden rounded-2xl border border-neutral-200 ${project.id === 'shelflife' || project.id === 'staysavvy' || project.id === 'serve' ? 'bg-white' : 'bg-gray-100 dark:bg-zinc-800'} shadow-sm dark:border-zinc-700`}
             style={{ transform: 'translateZ(20px)' }}
             >
             <Image
-                src={project.imageUrl}
+                src={project.cardImageUrl ?? project.imageUrl}
                 alt={project.title}
                 fill
                 sizes={compact ? '80px' : '(max-width: 640px) 96px, 112px'}
-                className={project.id === 'shelflife' || project.id === 'staysavvy' ? 'object-contain p-1' : 'object-cover transition-transform duration-500 group-hover:scale-105'}
+                className={project.id === 'shelflife' || project.id === 'staysavvy' || project.id === 'serve' ? 'object-contain p-1' : 'object-cover transition-transform duration-500 group-hover:scale-105'}
             />
             </div>
 

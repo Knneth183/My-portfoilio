@@ -14,7 +14,7 @@ const projects = [
   },
   {
     title: 'Project SERVE',
-    image: '/project_card/project2.jpg',
+    image: '/project_card/748b2657-2aef-4d10-b023-6b626d5454b7.jfif',
     description: 'An Android app and web dashboard for community infrastructure and service requests.',
     categories: ['Android app', 'Web dashboard'],
   },
@@ -42,7 +42,7 @@ function ProjectPreview({ project, side = false, onSelect }: { project: (typeof 
 
       <div className="flex items-center gap-4">
         <div className={`${side ? 'h-11 w-11' : 'h-20 w-20 sm:h-24 sm:w-24'} relative shrink-0 overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-100 dark:border-zinc-700 dark:bg-zinc-800`}>
-          <Image src={project.image} alt="" fill sizes={side ? '44px' : '(max-width: 640px) 80px, 96px'} className={project.title === 'ShelfLife-AI' || project.title === 'StaySavvy Hotel Tracking System' ? 'object-contain p-1' : 'object-cover'} />
+          <Image src={project.image} alt="" fill sizes={side ? '44px' : '(max-width: 640px) 80px, 96px'} className={project.title === 'ShelfLife-AI' || project.title === 'StaySavvy Hotel Tracking System' || project.title === 'Project SERVE' ? 'object-contain p-1' : 'object-cover'} />
         </div>
         <h3 className={`${side ? 'text-base' : 'text-2xl sm:text-3xl'} font-medium leading-snug tracking-tight text-neutral-950 dark:text-zinc-100`}>{project.title}</h3>
       </div>
