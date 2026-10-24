@@ -1,4 +1,5 @@
 const roles = [
+  { period: 'Freelance', role: 'Freelance Layout Artist', organization: 'Independent', details: [] },
   { period: '90 hours · Senior High School Work Immersion', role: 'CITE Department Work Immersion', organization: 'PHINMA University of Pangasinan', details: ['Collaborated on a web-based project as an internship final requirement.', 'Helped coordinate team tasks and contributed to designing and developing the application.'] },
 ];
 

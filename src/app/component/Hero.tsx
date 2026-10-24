@@ -20,6 +20,7 @@ const technologies = [
 const socialLinks = [
   { name: 'github', href: 'https://github.com/Knneth183' },
   { name: 'linkedin', href: 'https://www.linkedin.com/in/kenneth-lim-aa6637334/' },
+  { name: 'instagram', href: 'https://www.instagram.com/kenlimto/?hl=en' },
 ];
 
 export default function Hero() {
@@ -59,9 +60,6 @@ export default function Hero() {
           <div className=" dark:text-neutral-200 space-y-4 text-neutral-600 text-base md:text-lg leading-relaxed max-w-xl">
             <p>
               I&apos;m an Information Technology student at <span className="dark:text-amber-200 text-neutral-900">PHINMA University of Pangasinan</span>, specializing in Cybersecurity. I build web and mobile applications as part of my studies and project work.
-            </p>
-            <p>
-              My projects include a barangay infrastructure monitoring system, a hotel tracking platform, and an AI-assisted inventory management system.
             </p>
           </div>
           <div className="dark:text-amber-200 pt-2 flex flex-wrap gap-x-6 gap-y-2 font-mono text-sm text-neutral-600">

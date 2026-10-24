@@ -1,17 +1,52 @@
 'use client';
 
-import { useState } from 'react';
 import { ProjectCard } from '@/app/component/ProjectCard';
 
 const projects = [
-  { id: 'serve', title: 'Project SERVE', description: 'A barangay infrastructure monitoring system for Barangay II & III Nueva, with an Android app and web administration dashboard.', longDescription: 'Project SERVE supports community governance and infrastructure management by bringing project monitoring, resident records, and service requests into one system.', imageUrl: '/project_card/project2.jpg', techStack: ['Kotlin', 'XML', 'Supabase', 'PostgreSQL'], figmaUrl: 'https://www.figma.com/design/NEBhHeq7d3dK06aIG6JKti/Project-SERVE--The-Barangay-2-3-Nueva--Dagupan-City-Integrated-Infrastructure-Monitoring-System-APP?node-id=0-1&t=OjhbfnTLH4dpHyX2-1', features: ['Android mobile application', 'Web-based administration dashboard', 'Infrastructure and service request monitoring'] },
-  { id: 'shelflife', title: 'ShelfLife-AI', description: 'An AI-powered inventory and expiration tracking system designed to reduce perishable goods waste.', longDescription: 'Combines a web administration dashboard with inventory intelligence for expiration alerts, restocking, and near-expiry pricing recommendations.', imageUrl: '/project_card/image5.jpg', techStack: ['TypeScript', 'Node.js', 'Express', 'React', 'MongoDB', 'LLM integration'], features: ['Expiration alerts and audit logging', 'Restocking and waste prediction', 'Near-expiry discount recommendations'] },
-  { id: 'staysavvy', title: 'StaySavvy Hotel Tracking System', description: 'A centralized web system for hotel reservations, guest and staff records, and feedback tracking.', imageUrl: '/project_card/image3.jpg', techStack: ['PHP', 'HTML', 'CSS', 'JavaScript', 'Tailwind CSS', 'MySQL', 'XAMPP'] },
-  { id: 'fureverpets', title: 'FurEverPets Shop', description: 'An e-commerce website concept for pet products, adoption information, and helpful pet care content.', imageUrl: '/project_card/image2.jpg', techStack: ['HTML', 'CSS'] },
-  { id: 'finwise', title: 'FinWise Financial Advising App', description: 'A Python application concept for approachable financial guidance and personal finance management.', imageUrl: '/project_card/image1.jpg', techStack: ['Python'] },
+  {
+    id: 'serve',
+    title: 'Project SERVE',
+    description: 'A barangay infrastructure monitoring system for Barangay II & III Nueva, with an Android app and web administration dashboard.',
+    longDescription: 'Project SERVE supports community governance and infrastructure management by bringing project monitoring, resident records, and service requests into one system.',
+    imageUrl: '/project_card/project2.jpg',
+    techStack: ['Kotlin', 'XML', 'Supabase', 'PostgreSQL'],
+    figmaUrl: 'https://www.figma.com/design/NEBhHeq7d3dK06aIG6JKti/Project-SERVE--The-Barangay-2-3-Nueva--Dagupan-City-Integrated-Infrastructure-Monitoring-System-APP?node-id=0-1&t=OjhbfnTLH4dpHyX2-1',
+    features: ['Android mobile application', 'Web-based administration dashboard', 'Infrastructure and service request monitoring'],
+  },
+  {
+    id: 'shelflife',
+    title: 'ShelfLife-AI',
+    description: 'An intelligent inventory, expiry, and demand forecasting system for food-service teams, built to help reduce food waste.',
+    longDescription: 'ShelfLife AI brings ingredient inventory, batch expiry tracking, usage and waste records, and demand forecasting into one workspace. Its dashboard helps teams spot low stock and at-risk batches, review forecasts, and make informed purchasing decisions. Forecasts and operational recommendations support staff decisions; they do not change inventory automatically.',
+    imageUrl: '/project_card/shelflife-ai-logo.png',
+    githubUrl: 'https://github.com/heizevg08/ShelfLife-AI.git',
+    figmaUrl: 'https://www.figma.com/design/wBNCte4BSI2KKKvEnQsrkF/UI-UX?node-id=33-2&t=KirYndBkKt5RZcd7-1',
+    techStack: ['React', 'TypeScript', 'Vite', 'Express', 'MongoDB', 'Python', 'Machine Learning'],
+    features: ['Ingredient and batch inventory tracking', 'Expiry alerts, stock status, and audit records', 'Usage and waste monitoring', 'Demand forecasting and shortage risk insights', 'Change requests for controlled inventory updates', 'Reports and analytics for food-service operations'],
+  },
+  {
+    id: 'staysavvy',
+    title: 'StaySavvy Hotel Tracking System',
+    description: 'A centralized web system for hotel reservations, guest and staff records, and feedback tracking.',
+    longDescription: 'StaySavvy brings hotel reservation management, guest and staff records, and customer feedback tracking together in one web-based system.',
+    imageUrl: '/project_card/staysavvy-logo.png',
+    techStack: ['PHP', 'HTML', 'CSS', 'JavaScript', 'Tailwind CSS'],
+    features: ['Hotel reservation management', 'Guest and staff record management', 'Customer feedback tracking'],
+  },
 ];
 
 export default function ProjectsPage() {
-  const [hoveredTech, setHoveredTech] = useState<string | null>(null);
-  return <main id="projects" className="mx-auto w-full max-w-6xl space-y-8 px-6 py-12 sm:px-10"><header className="space-y-3"><p className="font-mono text-sm uppercase tracking-widest text-neutral-400">Selected work</p><h1 className="text-4xl font-semibold tracking-tight">Projects</h1><p className="max-w-2xl text-neutral-500 dark:text-zinc-400">Projects from my studies and development work.</p></header><div className="grid grid-cols-1 gap-4 md:grid-cols-2">{projects.map((project) => <ProjectCard key={project.id} project={project} hoveredTech={hoveredTech} onTechHover={setHoveredTech} />)}</div></main>;
+  return (
+    <main id="projects" className="mx-auto w-full max-w-6xl space-y-8 px-6 py-12 sm:px-10">
+      <header className="space-y-3">
+        <h1 className="text-4xl font-semibold tracking-tight">Projects</h1>
+        <p className="max-w-2xl text-neutral-500 dark:text-zinc-400">Projects from my studies and development work.</p>
+      </header>
+      <div className="grid grid-cols-1 gap-4 sm:gap-5">
+        {projects.map((project) => (
+          <ProjectCard key={project.id} project={project} />
+        ))}
+      </div>
+    </main>
+  );
 }

@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
-import { UserRound } from 'lucide-react';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabasePublishableKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
@@ -71,13 +70,9 @@ export default function ViewerPresence({ isCollapsed }: { isCollapsed: boolean }
     };
   }, []);
 
-  if (isCollapsed) {
-    return <div className="flex justify-center" title={viewers === null ? 'Live visitor count unavailable' : `${viewers} people viewing now`}>
-      <span className="flex h-8 w-8 items-center justify-center rounded-full border border-neutral-200 text-neutral-500 dark:border-zinc-700 dark:text-zinc-400"><UserRound className="h-4 w-4" /></span>
-    </div>;
-  }
+  if (isCollapsed) return null;
 
-  return <section aria-live="polite" className="border-t border-neutral-200 px-1 pt-4 dark:border-zinc-800">
+  return <section aria-live="polite" className="mx-1 border-t border-neutral-200 px-1 pt-3 dark:border-zinc-800">
     {configured && viewers !== null ? <>
       <div className="flex items-center" aria-hidden="true">
         {Array.from({ length: Math.min(viewers, 4) }, (_, index) => <ViewerAvatar key={index} variant={index} />)}

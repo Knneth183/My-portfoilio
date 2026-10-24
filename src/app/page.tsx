@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
 import Link from 'next/link';
 import Hero from "./component/Hero";
 import TechStack from "./component/TechStack";
-import { ProjectCard } from "./component/ProjectCard";
 import '@radix-ui/themes/styles.css';
-import { MeteorsDemo } from './component/meteor';
+import LayoutWorkGallery from './component/LayoutWorkGallery';
+import GitHubActivity from './component/GitHubActivity';
+import FeaturedProjects from './component/FeaturedProjects';
+import HomeCertificates from './component/HomeCertificates';
 
 const technologies = [
   "Python",
@@ -18,35 +19,14 @@ const technologies = [
   "Tailwind CSS",
 ];
 
-const PROJECTS_DATA = [
-  {
-    id: '2',
-    title: 'Project SERVE: Barangay Infrastructure Monitoring System',
-    description: 'A mobile app and web dashboard for community infrastructure projects, resident records, and service requests.',
-    imageUrl: '/project_card/project2.jpg',
-    techStack: ['Kotlin', 'XML', 'Supabase'],
-    figmaUrl: "https://www.figma.com/design/NEBhHeq7d3dK06aIG6JKti/Project-SERVE--The-Barangay-2-3-Nueva--Dagupan-City-Integrated-Infrastructure-Monitoring-System-APP?node-id=0-1&t=OjhbfnTLH4dpHyX2-1",
-    className: 'col-span-1',
-  },
-  {
-    id: '3',
-    title: 'ShelfLife-AI',
-    imageUrl: '/project_card/image5.jpg',
-    description: 'An AI-powered inventory and expiration tracking system with waste prediction and restocking support.',
-    techStack: ['TypeScript', 'React', 'Node.js', 'MongoDB'],
-    className: 'col-span-1',
-  },
-];
-
 export default function Home() {
-  const [hoveredTech, setHoveredTech] = useState<string | null>(null);
   return (
     <main className="max-w-6xl w-full mx-auto px-6 sm:px-10 md:px-16 lg:px-20 space-y-5 flex-1 py-8">
           <Hero />
           
           {/* Header Row */}
           <div className="flex items-center justify-between text-xs tracking-widest uppercase font-mono">
-            <span className="text-neutral-400 dark:text-zinc-500 font-medium">STACK</span>
+            <span className="text-neutral-400 dark:text-zinc-500 font-medium">01 — stack</span>
             <Link href="/stack" 
               className="hover:text-neutral-900 dark:hover:text-white dark:text-zinc-400 transition-colors flex items-center gap-1"
             >
@@ -70,24 +50,15 @@ export default function Home() {
             </Link>
           </div>
 
-          <section className="space-y-3 py-8">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">Featured Projects</h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {PROJECTS_DATA.map((project) => (
-                <ProjectCard
-                  key={project.id}
-                  project={project}
-                  hoveredTech={hoveredTech}
-                  onTechHover={setHoveredTech}
-                />
-              ))}
-            </div>
-          </section>
+          <FeaturedProjects />
+
+          <HomeCertificates />
           
-          <MeteorsDemo />
+          <LayoutWorkGallery />
 
           <TechStack />
+
+          <GitHubActivity />
 
           
     </main>

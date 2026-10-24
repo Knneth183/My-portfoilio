@@ -2,7 +2,7 @@
 
     import React, { useRef, useState, useEffect } from 'react';
     import Image from 'next/image';
-    import { FiExternalLink, FiGithub, FiX, FiGlobe, FiFigma, FiCheckCircle } from 'react-icons/fi';
+    import { FiExternalLink, FiGithub, FiX, FiGlobe, FiFigma, FiCheckCircle, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
     //import { Avatar, Box, Card, Flex, Text } from '@radix-ui/themes/dist/cjs/components/index.js';
 
     export interface ProjectLink {
@@ -28,15 +28,13 @@
     interface ProjectCardProps {
     project: Project;
     intensity?: number;
-    hoveredTech: string | null;
-    onTechHover: (tech: string | null) => void;
+    compact?: boolean;
     }
 
     export const ProjectCard: React.FC<ProjectCardProps> = ({
     project,
     intensity = 0.6,
-    hoveredTech,
-    onTechHover,
+    compact = false,
     }) => {
     const cardRef = useRef<HTMLDivElement>(null);
     const [rotate, setRotate] = useState({ x: 0, y: 0 });
@@ -49,6 +47,12 @@
         project.imageUrl,
         ...(project.additionalImages || []),
     ];
+    const activeImageIndex = galleryImages.indexOf(activeImage);
+
+    const showImage = (index: number) => {
+        const nextIndex = (index + galleryImages.length) % galleryImages.length;
+        setActiveImage(galleryImages[nextIndex]);
+    };
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
@@ -97,16 +101,26 @@
         <div
             ref={cardRef}
             onClick={() => setIsOpen(true)}
+            onKeyDown={(event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    setIsOpen(true);
+                }
+            }}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className="group relative w-full cursor-pointer rounded-2xl bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 p-4 transition-all duration-300 ease-out hover:border-cyan-500/50 dark:hover:border-cyan-500/50 hover:shadow-xl hover:shadow-cyan-500/10"
+            role="button"
+            tabIndex={0}
+            aria-haspopup="dialog"
+            aria-label={`View details for ${project.title}`}
+            className="group relative grid w-full cursor-pointer grid-cols-[6rem_minmax(0,1fr)] gap-x-4 overflow-hidden rounded-3xl border border-neutral-200 bg-white p-4 shadow-[0_16px_48px_-36px_rgba(0,0,0,0.35)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-cyan-500/40 hover:shadow-[0_24px_60px_-36px_rgba(8,145,178,0.3)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-cyan-500/50 sm:grid-cols-[7rem_minmax(0,1fr)] sm:gap-x-6 sm:p-6"
             style={{
             transformStyle: 'preserve-3d',
             transform: `perspective(1000px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
             }}
         >
             <div
-            className="pointer-events-none absolute inset-0 rounded-2xl transition-opacity duration-300 z-10"
+            className="pointer-events-none absolute inset-0 z-10 rounded-3xl transition-opacity duration-300"
             style={{
                 background: `radial-gradient(circle at ${glare.x}% ${glare.y}%, rgba(255,255,255,0.15) 0%, transparent 60%)`,
                 opacity: glare.opacity,
@@ -114,53 +128,31 @@
             />
 
             <div
-            className="relative h-48 w-full overflow-hidden rounded-xl bg-gray-100 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700/60"
+            className={`relative aspect-square ${compact ? 'w-20' : 'w-24 sm:w-28'} self-start overflow-hidden rounded-2xl border border-neutral-200 ${project.id === 'shelflife' || project.id === 'staysavvy' ? 'bg-white' : 'bg-gray-100 dark:bg-zinc-800'} shadow-sm dark:border-zinc-700`}
             style={{ transform: 'translateZ(20px)' }}
             >
             <Image
                 src={project.imageUrl}
                 alt={project.title}
                 fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                sizes={compact ? '80px' : '(max-width: 640px) 96px, 112px'}
+                className={project.id === 'shelflife' || project.id === 'staysavvy' ? 'object-contain p-1' : 'object-cover transition-transform duration-500 group-hover:scale-105'}
             />
             </div>
 
-            <div className="mt-5 space-y-3" style={{ transform: 'translateZ(30px)' }}>
-            <h3 className="text-xl font-bold tracking-tight text-gray-900 dark:text-zinc-100 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors flex items-center justify-between">
-                <span>{project.title}</span>
-                <span className="text-xs font-normal text-gray-400 dark:text-zinc-500 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors shrink-0">
+            <div className="flex min-w-0 flex-col justify-center gap-2 sm:gap-3" style={{ transform: 'translateZ(30px)' }}>
+            <h3 className={`${compact ? 'text-lg' : 'text-xl sm:text-2xl'} font-semibold leading-snug tracking-tight text-gray-900 transition-colors group-hover:text-cyan-700 dark:text-zinc-100 dark:group-hover:text-cyan-300`}>
+                <span className="line-clamp-2">{project.title}</span>
+                <span className="hidden">
                 Details →
                 </span>
             </h3>
 
-            <p className="text-sm text-gray-600 dark:text-zinc-400 line-clamp-2 leading-relaxed">
+            <p className={`${compact ? 'text-[13px]' : 'text-sm'} line-clamp-2 leading-relaxed text-gray-600 dark:text-zinc-400`}>
                 {project.description}
             </p>
-
-            <div className="flex flex-wrap gap-1.5 pt-2">
-                {project.techStack.map((tech) => {
-                const isHighlighted = hoveredTech === tech;
-                return (
-                    <span
-                    key={tech}
-                    onMouseEnter={(e) => {
-                        e.stopPropagation();
-                        onTechHover(tech);
-                    }}
-                    onMouseLeave={(e) => {
-                        e.stopPropagation();
-                        onTechHover(null);
-                    }}
-                    className={`rounded-md px-2.5 py-1 text-xs font-medium transition-all duration-200 ${
-                        isHighlighted
-                        ? 'bg-cyan-500 text-white shadow-md shadow-cyan-500/30 scale-105'
-                        : 'bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-zinc-300 hover:bg-gray-200 dark:hover:bg-zinc-700 border border-gray-200 dark:border-zinc-700'
-                    }`}
-                    >
-                    {tech}
-                    </span>
-                );
-                })}
+            <div className="mt-1 flex items-center justify-end border-t border-neutral-200 pt-3 dark:border-zinc-800">
+                <span className="ml-auto inline-flex items-center gap-1 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-neutral-500 transition-colors group-hover:text-cyan-700 dark:text-zinc-400 dark:group-hover:text-cyan-300">View details <FiExternalLink aria-hidden="true" className="h-3.5 w-3.5" /></span>
             </div>
             </div>
         </div>
@@ -196,7 +188,7 @@
                 <div className="flex-1 space-y-7 overflow-y-auto p-5 sm:space-y-8 sm:p-8">
                 {/* Media Gallery Section */}
                 <div className="space-y-3">
-                    <div className="relative h-[clamp(16rem,48vw,32rem)] w-full overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-950 shadow-inner dark:border-zinc-800">
+                    <div className={`relative h-[clamp(16rem,48vw,32rem)] w-full overflow-hidden rounded-2xl border border-neutral-200 ${project.id === 'shelflife' ? 'bg-white' : 'bg-neutral-950 dark:border-zinc-800'} shadow-inner`}>
                     <Image
                         src={activeImage}
                         alt={project.title}
@@ -204,6 +196,27 @@
                         className="object-contain p-2 transition-all duration-300 sm:p-4"
                         priority
                     />
+                    {galleryImages.length > 1 && <>
+                        <button
+                        type="button"
+                        onClick={() => showImage(activeImageIndex - 1)}
+                        aria-label="Show previous project image"
+                        className="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded-full border border-neutral-200 bg-white/90 p-2 text-neutral-800 shadow transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+                        >
+                            <FiChevronLeft className="h-5 w-5" aria-hidden="true" />
+                        </button>
+                        <button
+                        type="button"
+                        onClick={() => showImage(activeImageIndex + 1)}
+                        aria-label="Show next project image"
+                        className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full border border-neutral-200 bg-white/90 p-2 text-neutral-800 shadow transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+                        >
+                            <FiChevronRight className="h-5 w-5" aria-hidden="true" />
+                        </button>
+                        <span className="absolute bottom-3 right-3 rounded-full bg-neutral-950/70 px-2.5 py-1 font-mono text-xs text-white" aria-live="polite">
+                            {activeImageIndex + 1} / {galleryImages.length}
+                        </span>
+                    </>}
                     </div>
 
                     {/* Gallery Thumbnails */}
@@ -212,7 +225,9 @@
                         {galleryImages.map((img, idx) => (
                         <button
                             key={idx}
-                            onClick={() => setActiveImage(img)}
+                            onClick={() => showImage(idx)}
+                            aria-label={`Show project image ${idx + 1}`}
+                            aria-current={activeImage === img ? 'true' : undefined}
                             className={`relative h-16 w-24 shrink-0 overflow-hidden rounded-xl border transition-all ${
                             activeImage === img
                                 ? 'border-cyan-500 opacity-100 scale-95 ring-2 ring-cyan-500/20'

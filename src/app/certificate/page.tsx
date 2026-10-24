@@ -1,5 +1,29 @@
-import Link from 'next/link';
+import { certificates } from '@/lib/certificates';
+import CertificateCard from '@/app/component/CertificateCard';
 
 export default function CertificatePage() {
-  return <main className="mx-auto w-full max-w-6xl space-y-8 px-6 py-12 sm:px-10"><header className="space-y-3"><p className="font-mono text-sm uppercase tracking-widest text-neutral-400">Learning milestones</p><h1 className="text-4xl font-semibold tracking-tight">Certifications</h1><p className="max-w-2xl text-neutral-500 dark:text-zinc-400">Professional credentials and completed training.</p></header><article className="rounded-2xl border border-neutral-200 p-6 dark:border-zinc-800"><div className="flex flex-wrap items-start justify-between gap-4"><div><p className="font-mono text-xs uppercase tracking-widest text-cyan-700 dark:text-cyan-400">Cisco Networking Academy</p><h2 className="mt-3 text-xl font-semibold">Introduction to Cybersecurity</h2><p className="mt-1 text-sm text-neutral-500 dark:text-zinc-400">Student-level course completion credential</p></div><time dateTime="2026-05-28" className="rounded-full bg-neutral-100 px-3 py-1.5 font-mono text-xs text-neutral-600 dark:bg-zinc-800 dark:text-zinc-300">May 28, 2026</time></div><p className="mt-5 max-w-3xl text-sm leading-6 text-neutral-600 dark:text-zinc-300">Covered online safety and cybersecurity fundamentals, common threats and vulnerabilities, personal protection practices, and ways organizations defend their operations.</p><Link href="/certificates/cisco-introduction-to-cybersecurity.pdf" target="_blank" className="mt-6 inline-flex items-center gap-2 rounded-xl bg-cyan-600 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-cyan-700">View certificate <span aria-hidden="true">↗</span></Link></article><Link href="/stack" className="inline-flex text-sm font-medium text-cyan-700 hover:text-cyan-900 dark:text-cyan-400 dark:hover:text-cyan-300">View my technical skills <span aria-hidden="true" className="ml-2">→</span></Link></main>;
+  return (
+    <main className="min-h-screen px-6 py-12 sm:px-10">
+      <section aria-labelledby="certifications-heading" className="mx-auto w-full max-w-6xl space-y-8">
+        <header className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="font-mono text-xs uppercase tracking-[0.22em] text-neutral-700 dark:text-zinc-300">04 — certifications</p>
+            <h1 id="certifications-heading" className="mt-3 text-4xl font-semibold tracking-tight text-neutral-950 dark:text-white sm:text-5xl">Certificates</h1>
+            <p className="mt-3 max-w-xl text-sm leading-6 text-neutral-700 dark:text-zinc-300 sm:text-base">
+              Credentials earned through focused learning in cybersecurity and technology.
+            </p>
+          </div>
+          <p className="rounded-full border border-neutral-950/10 bg-white/40 px-4 py-2 font-mono text-xs uppercase tracking-widest text-neutral-800 dark:border-white/10 dark:bg-white/5 dark:text-zinc-300">
+            {certificates.length} {certificates.length === 1 ? 'certificate' : 'certificates'}
+          </p>
+        </header>
+
+        <div className={`grid gap-5 ${certificates.length === 1 ? 'grid-cols-1 justify-items-center' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'}`}>
+          {certificates.map((certificate) => (
+            <CertificateCard key={certificate.title} certificate={certificate} />
+          ))}
+        </div>
+      </section>
+    </main>
+  );
 }
