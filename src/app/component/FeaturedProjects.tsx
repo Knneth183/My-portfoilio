@@ -14,7 +14,7 @@ const projects = [
   },
   {
     title: 'Project SERVE',
-    image: '/project_card/748b2657-2aef-4d10-b023-6b626d5454b7.jfif',
+    image: '/project_card/project-serve-logo.jpg',
     description: 'An Android app and web dashboard for community infrastructure and service requests.',
     categories: ['Android app', 'Web dashboard'],
   },

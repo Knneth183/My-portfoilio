@@ -9,7 +9,7 @@ const projects = [
     description: 'A barangay infrastructure monitoring system for Barangay II & III Nueva, with an Android app and web administration dashboard.',
     longDescription: 'Project SERVE supports community governance and infrastructure management by bringing project monitoring, resident records, and service requests into one system.',
     imageUrl: '/project_card/project2.jpg',
-    cardImageUrl: '/project_card/748b2657-2aef-4d10-b023-6b626d5454b7.jfif',
+    cardImageUrl: '/project_card/project-serve-logo.jpg',
     techStack: ['Kotlin', 'XML', 'Supabase', 'PostgreSQL'],
     figmaUrl: 'https://www.figma.com/design/NEBhHeq7d3dK06aIG6JKti/Project-SERVE--The-Barangay-2-3-Nueva--Dagupan-City-Integrated-Infrastructure-Monitoring-System-APP?node-id=0-1&t=OjhbfnTLH4dpHyX2-1',
     features: ['Android mobile application', 'Web-based administration dashboard', 'Infrastructure and service request monitoring'],
