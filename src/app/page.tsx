@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import Hero from "./component/Hero";
-import TechStack from "./component/TechStack";
 import '@radix-ui/themes/styles.css';
 import LayoutWorkGallery from './component/LayoutWorkGallery';
 import GitHubActivity from './component/GitHubActivity';
@@ -55,8 +54,6 @@ export default function Home() {
           <HomeCertificates />
           
           <LayoutWorkGallery />
-
-          <TechStack />
 
           <GitHubActivity />
 
